@@ -7,13 +7,17 @@ const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const TARGET = process.env.npm_lifecycle_event;
 
 const PATHS = {
-  app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'build'),
+  app: path.join(__dirname, '/app'),
+  build: path.join(__dirname, '/build'),
 };
 
 const common = {
   entry: {
     app: PATHS.app,
+  },
+  resolve: {
+    root: path.resolve('app'),
+    extensions: ['', '.js', '.jsx']
   },
   output: {
     path: PATHS.build,
@@ -23,7 +27,7 @@ const common = {
      preLoaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['eslint'],
+        loaders: ['eslint', 'babel?cacheDirectory'],
         include: PATHS.app,
       },
     ],
