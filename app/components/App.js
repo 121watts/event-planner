@@ -1,9 +1,8 @@
-import React from 'react';
-import Note from 'components/Note.js';
+import React, {Component} from 'react';
+import Register from 'components/Register/Register';
 
-export default React.createClass ({
-  displayName: 'App',
+export default class App extends Component {
   render() {
-    return <Note />;
+    return <Register />;
   }
-});
+}
