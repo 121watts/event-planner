@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "app": "^0.1.0",
+    "classnames": "^2.2.3",
     "components": "^0.1.0",
     "lodash": "^4.6.1",
     "react": "^0.14.7",
