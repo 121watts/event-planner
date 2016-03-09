@@ -16,7 +16,7 @@ export default class PasswordValidator extends Component {
     const allMatch = isLongEnough && hasUpperAndLowercase && hasNumber
 
     return (
-      <div className="password-validator">
+      <div className={classNames("password-validator", {'all-green': allMatch})}>
         <div className={classNames({"error": !isLongEnough}, {"success": isLongEnough})}>
           <div className="icon icon-green-check" />
           <div className="message">8 or more characters </div>

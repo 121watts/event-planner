@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import PasswordValidator from 'components/PasswordValidator/PasswordValidator';
 import ReactDOM from 'react-dom';
 
 import './register.css';
 
 export default class Register extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       isPasswordFocused: false,
@@ -18,7 +18,7 @@ export default class Register extends Component {
     const {password} = this.state;
 
     return (
-      <form className="form-register" method="post" action="#" autoComplete="on">
+      <form className="form-register" onSubmit={this.onRegisterClick} autoComplete="on">
         <div className="form-register-with-email">
           <div className="form-white-background">
 
@@ -29,7 +29,7 @@ export default class Register extends Component {
             <div className="form-row">
               <label htmlFor="first-name">
                 <span>Name</span>
-                <input placeholder="first name" ref="name" type="text" name="first-name" id="name" autoComplete="given-name" autoFocus required />
+                <input placeholder="first name" type="text" name="first-name" id="name" autoComplete="given-name" autoFocus required />
               </label>
             </div>
 
@@ -57,7 +57,7 @@ export default class Register extends Component {
                   id="password"
                   onBlur={this.removePasswordValidation}
                   onFocus={this.renderPasswordValidation}
-                  onChange={this.getPassword}
+                  onChange={this.handlePasswordChange}
                   required
                 />
                 <PasswordValidator password={password} />
@@ -65,7 +65,7 @@ export default class Register extends Component {
             </div>
 
             <div className="form-row">
-              <button type="submit" onSubmit={this.handleRegister}>Register</button>
+              <button type="submit" >Register</button>
             </div>
           </div>
           <a href="#" className="form-log-in-with-existing">Already have an account? Login here &rarr;</a>
@@ -73,6 +73,12 @@ export default class Register extends Component {
       </form>
     );
   }
+
+  onRegisterClick = (e) => {
+    e.preventDefault()
+
+    this.props.onRegisterClick()
+  };
 
   renderPasswordValidation = () => {
     this.setState({isPasswordFocused: true})
@@ -82,9 +88,11 @@ export default class Register extends Component {
     this.setState({isPasswordFocused: false})
   };
 
-  getPassword = () => {
+  handlePasswordChange = () => {
     const password = ReactDOM.findDOMNode(this.refs.password)
     this.setState({password: password.value || ""})
   };
 
 }
+
+Register.propTypes = {onRegisterClick: PropTypes.func.isRequired}
